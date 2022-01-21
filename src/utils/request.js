@@ -39,4 +39,16 @@ instance.interceptors.response.use(res => {
   }
   return Promise.reject(err)
 })
-// 4.导出函数，调用axios实例发请求 返回promise
+// 4.导出函数，调用axios实例发请求 返回Promise
+
+// 请求工具函数 负责发请求：请求地址、请求方式提交的数据
+export default (url, method, submitData) => {
+  return instance({
+    url,
+    method,
+    // 当method为get 使用params传递submitData(地址栏)
+    // 当method不为get 使用data传递submitData(请求体)
+    // []写js表达式表示key
+    [method.toLowerCase() === 'get' ? 'params' : 'data']: submitData
+  })
+}
