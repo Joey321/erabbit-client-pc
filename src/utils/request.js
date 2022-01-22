@@ -15,6 +15,7 @@ instance.interceptors.request.use(config => {
 // 拦截业务逻辑 请求配置修改
   const { profile } = store.state.user
   if (profile.token) {
+    console.log(profile.token)
     config.headers.Authorization = 'Bearer ' + profile.token
   }
   return config
